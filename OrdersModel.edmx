@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="GetAgentHighestOrderSum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAgentWithOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrderChronologicall" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAgentWithOrdersByYearAndCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="year" Type="int" Mode="In" />
+          <Parameter Name="count" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="TestModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TestEntities1" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="GetAgentHighestOrderSum" ReturnType="Collection(TestModel.GetAgentHighestOrderSum_Result)">
+            <Parameter Name="year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAgentWithOrder">
+            <Parameter Name="OrderChronologicall" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAgentWithOrdersByYearAndCount" ReturnType="Collection(TestModel.GetAgentWithOrdersByYearAndCount_Result)">
+            <Parameter Name="year" Mode="In" Type="Int32" />
+            <Parameter Name="count" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetAgentHighestOrderSum_Result">
+          <Property Type="String" Name="AGENT_CODE" Nullable="false" MaxLength="6" />
+          <Property Type="Double" Name="ORD_AMOUNT_SUM" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAgentWithOrdersByYearAndCount_Result">
+          <Property Type="String" Name="AGENT_CODE" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="AGENT_NAME" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="PHONE_NO" Nullable="true" MaxLength="15" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestModelStoreContainer" CdmEntityContainer="TestEntities1" >
+          <FunctionImportMapping FunctionImportName="GetAgentHighestOrderSum" FunctionName="TestModel.Store.GetAgentHighestOrderSum">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TestModel.GetAgentHighestOrderSum_Result">
+                <ScalarProperty Name="AGENT_CODE" ColumnName="AGENT_CODE" />
+                <ScalarProperty Name="ORD_AMOUNT_SUM" ColumnName="ORD_AMOUNT_SUM" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAgentWithOrder" FunctionName="TestModel.Store.GetAgentWithOrder" />
+          <FunctionImportMapping FunctionImportName="GetAgentWithOrdersByYearAndCount" FunctionName="TestModel.Store.GetAgentWithOrdersByYearAndCount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TestModel.GetAgentWithOrdersByYearAndCount_Result">
+                <ScalarProperty Name="AGENT_CODE" ColumnName="AGENT_CODE" />
+                <ScalarProperty Name="AGENT_NAME" ColumnName="AGENT_NAME" />
+                <ScalarProperty Name="PHONE_NO" ColumnName="PHONE_NO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
