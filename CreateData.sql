@@ -26,7 +26,7 @@ ORD_AMOUNT FLOAT NOT NULL,
 ADVANCE_AMOUNT FLOAT NOT NULL, 
 ORD_DATE DATETIME NOT NULL, 
 CUST_CODE VARCHAR(6) NOT NULL, 
-AGENT_CODE CHAR(6) NOT NULL, 
+AGENT_CODE VARCHAR(6) NOT NULL, 
 ORD_DESCRIPTION VARCHAR(60) NOT NULL
    );
 INSERT INTO ORDERS VALUES(200116, '600.00', '200.00', '11-18-2021', 'C00010', 'A009', 
@@ -97,8 +97,7 @@ CREATE TYPE [dbo].[idList] AS TABLE(
 )
 GO
 
-USE [Test]
-GO
+
 
 /****** Object:  StoredProcedure [dbo].[GetAgentHighestOrderSum]    Script Date: 29/01/2022 22:57:57 ******/
 SET ANSI_NULLS ON
@@ -132,8 +131,7 @@ Select top 1  AGENT_CODE,ORD_AMOUNT_SUM  From
 END
 GO
 
-USE [Test]
-GO
+
 
 /****** Object:  StoredProcedure [dbo].[GetAgentWithOrder]    Script Date: 29/01/2022 22:58:08 ******/
 SET ANSI_NULLS ON
@@ -173,9 +171,6 @@ inner join @agentList al on al.ID = ORDERS.AGENT_CODE
 END
 GO
 
-
-USE [Test]
-GO
 
 /****** Object:  StoredProcedure [dbo].[GetAgentWithOrdersByYearAndCount]    Script Date: 29/01/2022 22:58:29 ******/
 SET ANSI_NULLS ON
