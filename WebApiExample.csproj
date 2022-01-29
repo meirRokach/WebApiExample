@@ -90,6 +90,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CreateData.sql" />
     <Content Include="Global.asax" />
     <Content Include="OrdersModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
