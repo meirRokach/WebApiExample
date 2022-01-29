@@ -12,6 +12,8 @@ namespace WebApiExample.Controllers
 {
     public class HomeController : ApiController
     {
+        [Route("GetAgentWithOrdersByYearAndCount")]
+        [HttpGet]
         [ApiAuthorize]
         public HttpResponseMessage GetAgentWithOrdersByYearAndCount(int year, int count)
         {
@@ -23,6 +25,8 @@ namespace WebApiExample.Controllers
                  list);
         }
 
+        [Route("GetAgentHighestOrderSum")]
+        [HttpGet]
         [ApiAuthorize]
         public HttpResponseMessage GetAgentHighestOrderSum(int year)
         {
@@ -35,10 +39,11 @@ namespace WebApiExample.Controllers
 
         }
 
+        [Route("GetAgentWithOrder")]
+        [HttpGet]
         [ApiAuthorize]
         public HttpResponseMessage GetAgentWithOrder(string agentList, int orderChronologicall)
         {
-
 
             List<AgentWithOrder> result = DataService.GetAgentWithOrder(agentList.Split(',').ToList(), orderChronologicall);
 
